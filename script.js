@@ -1,10 +1,11 @@
 const allSeats = document.querySelectorAll(".seat-num");
 let ticketCounter = document.getElementById("ticket-counter");
 let availableSeat = document.getElementById("available-seats");
-const totalprice = document.getElementById("total-amount");
+let totalprice = document.getElementById("total-amount");
 const couponVaidator =document.getElementById("coupon-validator-input");
 const couponBtn=document.getElementById("coupon-btn")
 const discountPrice=document.getElementById("discounted-price")
+const grandTotalPrice=document.getElementById("grand-total");
 
 let price;
 
@@ -27,6 +28,8 @@ for (const seat of allSeats) {
 
         price = parseInt(totalprice.innerText) + 550;
         totalprice.innerText = price;
+       
+        grandTotalPrice.innerText=price;
 
         selectedSeatsArr.map((el) => {
           let selectedSeats = document.getElementById("selected-seats");
@@ -46,7 +49,7 @@ for (const seat of allSeats) {
 
       let price = parseInt(totalprice.innerText) - 550;
       totalprice.innerText = price;
-
+      grandTotalPrice.innerText=price;
       selectedSeatsArr.map((el) => {
         let selectedSeats = document.getElementById("selected-seats");
         document.querySelectorAll(`.${seatNum}`).forEach((arr) => {
@@ -56,24 +59,27 @@ for (const seat of allSeats) {
     }
   });
 }
-
+let discountPercentage=0;
 const discountedPrice = (discount)=>price - price *discount;
+
+
 
 couponBtn.addEventListener("click",()=>{
     
 
     if(couponVaidator.value === "NEW20"){
-        const discount=.2;
+        discountPercentage=.2;
       
-       discountPrice.innerText= discountedPrice(discount);
+       discountPrice.innerText= discountedPrice(discountPercentage);
+       grandTotalPrice.innerText=discountedPrice(discountPercentage);
        document.getElementById("invalid-coupon-tooltip").style.visibility="hidden"
         
 
     }
     else if(couponVaidator.value === "COUPLE15"){
-        const discount=.15;
-        discountedPrice(discount);
-        discountPrice.innerText= discountedPrice(discount);
+        discountPercentage=.15;
+        discountPrice.innerText= discountedPrice(discountPercentage);
+        grandTotalPrice.innerText=discountedPrice(discountPercentage);
         document.getElementById("invalid-coupon-tooltip").style.visibility="hidden"
         
 
@@ -82,6 +88,13 @@ couponBtn.addEventListener("click",()=>{
         document.getElementById("invalid-coupon-tooltip").style.visibility="visible"
     }
 })
+
+
+ 
+
+
+
+
 
 const nextBtn=document.getElementById("done-btn");
 nextBtn.addEventListener('click', ()=>{
