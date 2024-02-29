@@ -462,7 +462,7 @@ border-radius: .75rem;
 
 /* Fare Calculation */
 .seat-selection .column-right{
-    padding: 1rem;
+    padding: 1rem ;
     flex: 1;
     
 }
@@ -474,8 +474,8 @@ border-radius: .75rem;
 }
 
 .seat-selection .column-right h3{
-    border-bottom: 2px dashed #0307121a;
-    padding-bottom: .5rem;
+    border-bottom: 2px dashed #03071243;
+    padding-bottom: 2rem;
     margin-bottom: 1rem;
 }
 .fare-calc{
