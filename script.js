@@ -2,10 +2,10 @@ const allSeats = document.querySelectorAll(".seat-num");
 let ticketCounter = document.getElementById("ticket-counter");
 let availableSeat = document.getElementById("available-seats");
 let totalprice = document.getElementById("total-amount");
-const couponVaidator =document.getElementById("coupon-validator-input");
-const couponBtn=document.getElementById("coupon-btn")
-const discountPrice=document.getElementById("discounted-price")
-const grandTotalPrice=document.getElementById("grand-total");
+const couponVaidator = document.getElementById("coupon-validator-input");
+const couponBtn = document.getElementById("coupon-btn");
+const discountPrice = document.getElementById("discounted-price");
+const grandTotalPrice = document.getElementById("grand-total");
 
 let price;
 
@@ -28,8 +28,8 @@ for (const seat of allSeats) {
 
         price = parseInt(totalprice.innerText) + 550;
         totalprice.innerText = price;
-       
-        grandTotalPrice.innerText=price;
+
+        grandTotalPrice.innerText = price;
 
         selectedSeatsArr.map((el) => {
           let selectedSeats = document.getElementById("selected-seats");
@@ -49,7 +49,7 @@ for (const seat of allSeats) {
 
       let price = parseInt(totalprice.innerText) - 550;
       totalprice.innerText = price;
-      grandTotalPrice.innerText=price;
+      grandTotalPrice.innerText = price;
       selectedSeatsArr.map((el) => {
         let selectedSeats = document.getElementById("selected-seats");
         document.querySelectorAll(`.${seatNum}`).forEach((arr) => {
@@ -59,54 +59,44 @@ for (const seat of allSeats) {
     }
   });
 }
-let discountPercentage=0;
-const discountedPrice = (discount)=>price - price *discount;
+let discountPercentage = 0;
+const discountedPrice = (discount) => price - price * discount;
 
+couponBtn.addEventListener("click", () => {
+  if (couponVaidator.value === "NEW20") {
+    discountPercentage = 0.2;
 
+    discountPrice.innerText = discountedPrice(discountPercentage);
+    grandTotalPrice.innerText = discountedPrice(discountPercentage);
+    document.getElementById("invalid-coupon-tooltip").style.visibility =
+      "hidden";
+  } else if (couponVaidator.value === "COUPLE15") {
+    discountPercentage = 0.15;
+    discountPrice.innerText = discountedPrice(discountPercentage);
+    grandTotalPrice.innerText = discountedPrice(discountPercentage);
+    document.getElementById("invalid-coupon-tooltip").style.visibility =
+      "hidden";
+  } else {
+    document.getElementById("invalid-coupon-tooltip").style.visibility =
+      "visible";
+  }
+});
 
-couponBtn.addEventListener("click",()=>{
-    
+const nextBtn = document.getElementById("done-btn");
+nextBtn.addEventListener("click", () => {
+  if (
+    document.getElementById("phone-number").value &&
+    document.getElementById("name").value
+  ) {
+    document.getElementById("modal").style.visibility = "visible";
+  } else {
+    document.querySelectorAll(".invalid-tooltip").forEach((el) => {
+      el.style.visibility = "visible";
+    });
+  }
+});
 
-    if(couponVaidator.value === "NEW20"){
-        discountPercentage=.2;
-      
-       discountPrice.innerText= discountedPrice(discountPercentage);
-       grandTotalPrice.innerText=discountedPrice(discountPercentage);
-       document.getElementById("invalid-coupon-tooltip").style.visibility="hidden"
-        
-
-    }
-    else if(couponVaidator.value === "COUPLE15"){
-        discountPercentage=.15;
-        discountPrice.innerText= discountedPrice(discountPercentage);
-        grandTotalPrice.innerText=discountedPrice(discountPercentage);
-        document.getElementById("invalid-coupon-tooltip").style.visibility="hidden"
-        
-
-    }
-    else{
-        document.getElementById("invalid-coupon-tooltip").style.visibility="visible"
-    }
-})
-
-
- 
-
-
-
-
-
-const nextBtn=document.getElementById("done-btn");
-nextBtn.addEventListener('click', ()=>{
-
-    document.getElementById("modal").style.visibility="visible"
-})
-
-
-const continueBtn=document.getElementById("continue-btn")
-continueBtn.addEventListener('click',()=>{
-
-document.getElementById("modal").style.visibility="hidden"
-
-
-} )
+const continueBtn = document.getElementById("continue-btn");
+continueBtn.addEventListener("click", () => {
+  document.getElementById("modal").style.visibility = "hidden";
+});
