@@ -46,8 +46,7 @@ for (const seat of allSeats) {
       ticketCounter.innerText = seatTaken;
       let remainingSeat = parseInt(availableSeat.innerText) + 1;
       availableSeat.innerText = remainingSeat;
-
-      let price = parseInt(totalprice.innerText) - 550;
+       price = parseInt(totalprice.innerText) - 550;
       totalprice.innerText = price;
       grandTotalPrice.innerText = price;
       selectedSeatsArr.map((el) => {
@@ -77,6 +76,8 @@ couponBtn.addEventListener("click", () => {
     document.getElementById("invalid-coupon-tooltip").style.visibility =
       "hidden";
   } else {
+    discountPrice.innerText = 0;
+    grandTotalPrice.innerText = price;
     document.getElementById("invalid-coupon-tooltip").style.visibility =
       "visible";
   }
